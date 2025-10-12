@@ -26,6 +26,8 @@ flowchart TD
     C1 -- "Distance Reading" --> B1
 ```
 
+NB: This diagram uses generic filenames. Please refer to the Quick Start below or the folders for the actual filenames. 
+
 ## RL Feedback Cycle
 
 [Robot Action] → [Environment Response] → [Reward Calculation] → [Model Update]
@@ -47,7 +49,7 @@ cd server
 pip install -r requirements.txt
 # or using conda:
 conda env create -f environment.yml
-python motor_control.py
+python3 4pi_server.py
 ```
 
 ### 3. Set Up the Client (Laptop)
@@ -59,12 +61,22 @@ conda activate rl_robot
 
 ### 4. Train the RL Agent
 ```bash
-python train_agent.py
+python Train_DQN.py
+# or using PyCharm
+# load the above file in PyCharm and hit Shift + F10 to kick-off training.
+# NB: Ensure you have updated the Train_DQN.py file to point to **your** Pis IP Address.
 ```
 
 ### 5. Run Inference
 ```bash
-python run_inference.py
+# If using Anaconda: Open an Anaconda prompt --> Activate your environment which has the required dependencies installed --> Run the command below
+python run_inference_client_DQN.py --pi_ip (Your Pis IP Address) --model dqn_robot_16500_steps.zip --deterministic
 ```
 
-For more details or questions please contact - nikit.sharma.au@member.mensa.org
+## Next Steps
+- Integrate the gripper for object manipulation
+- Train in a more complex environment (obstacle avoidance in a maze)
+- Further experiments with different reward functions or changing the underlying algorithms
+- Collaborating with others working in the field of robotics or machine learning
+
+NB: In case of any issues or questions please contact - nikit.sharma.au@member.mensa.org / replytonikitsharma@gmail.com
