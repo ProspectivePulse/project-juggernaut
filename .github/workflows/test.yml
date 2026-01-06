@@ -9,30 +9,30 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    
+    # 1. Force Headless Mode for Matplotlib/Gym
+    env:
+      MPLBACKEND: Agg 
 
     steps:
-    # 1. Check out the code
     - uses: actions/checkout@v3
 
-    # 2. Set up Python
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
         python-version: "3.9"
 
-    # 3. Install Linux System Dependencies (CRITICAL for RL/OpenCV)
+    # 2. Install ALL common CV/RL libs
     - name: Install System Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgl1-mesa-glx
+        sudo apt-get install -y libgl1-mesa-glx libglib2.0-0 libsm6 libxext6 libxrender-dev
 
-    # 4. Install Python Dependencies
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # 5. Run Tests (With explicit path setting)
     - name: Run Pytest
       run: |
         export PYTHONPATH=$PYTHONPATH:.
