@@ -1,3 +1,4 @@
+[![CI Pipeline](https://github.com/ProspectivePulse/project-juggernaut/actions/workflows/test.yml/badge.svg)](https://github.com/ProspectivePulse/project-juggernaut/actions/workflows/test.yml)
 # Project-Juggernaut
 
 This project demonstrates a Reinforcement Learning (RL) approach for obstacle avoidance using a MegaPi-based robot.
