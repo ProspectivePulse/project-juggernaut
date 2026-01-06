@@ -1,0 +1,13 @@
+# --- Project Specific ---
+# Ignore heavy model assets
+models/
+dqn_checkpoints/
+dqn_tb_runs/
+
+# --- Standard Python/Env ---
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+env/
