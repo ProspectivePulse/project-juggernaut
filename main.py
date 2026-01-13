@@ -29,7 +29,10 @@ def main():
     server_parser = subparsers.add_parser("server", help="Start the Robot Server (Raspberry Pi")
     server_parser.add_argument("--port", type=int, help="Override Port")
 
-    # --- 4. CHECK COMMAND ---
+    # --- 4. API COMMAND ---
+    api_parser = subparsers.add_parser("api", help="Start Cloud Inference API")
+
+    # --- 5. CHECK COMMAND ---
     subparsers.add_parser("check", help="Validate Configuration")
 
     # Parse
@@ -59,8 +62,18 @@ def main():
         import src.server.pi_server as server
         server.start_server(port=args.port)
 
+    elif args.command == "api":
+        import uvicorn
+        import os
+        print("Starting Cloud Inference API...")
+
+        port = int(os.environ.get("PORT", 8080))
+
+        uvicorn.run("src.api:app", host="0.0.0.0", port=port)
+
     elif args.command == "check":
         Config.validate()
+
 
 if __name__ == "__main__":
     main()

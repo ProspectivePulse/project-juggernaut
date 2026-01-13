@@ -6,7 +6,7 @@ WORKDIR /app
 
 # 1. Install System Dependencies (GLIB, etc. required for OpenCV/Gym)
 RUN apt-get update && apt-get install -y \
-	libgl1-mesa-glx \
+	libgl1 \
 	libglib2.0-0 \
 	&& rm -rf /var/lib/apt/lists/*
 	
@@ -18,8 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 3. Copy the Source Code
 COPY src/ src/
 COPY main.py .
-COPY .env .
 
 # 4. Set the Default Entrypoint
 # This enables running: "docker run my-bot train" or "docker run my-bot server"
-ENTRYPOINT ["python", "main.py"]
+CMD ["python", "main.py", "api"]
